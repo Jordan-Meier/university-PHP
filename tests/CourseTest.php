@@ -57,7 +57,7 @@
             $course_number2 = 104;
             $dept_id2 = $test_Department->getId();
             $test_course2 = new Course($name2, $course_number2, $dept_id2);
-            $test_course->save();
+            $test_course2->save();
 
             //Act
             $result = Course::getAll();

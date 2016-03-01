@@ -47,17 +47,35 @@
 
         static function getAll()
         {
-
+            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+            $courses = array();
+            foreach($returned_courses as $course) {
+                $name = $course['name'];
+                $course_number = $course['course_number'];
+                $dept_id = $course['dept_id'];
+                $id = $course['id'];
+                $new_course = new Course($name, $course_number, $dept_id, $id);
+                array_push($courses, $new_course);
+            }
+            return $courses;
         }
 
         static function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM courses");
         }
 
         function save()
         {
-
+            $GLOBALS['DB']->exec(
+            "INSERT INTO courses (name, course_number, dept_id)
+            VALUES (
+                '{$this->getName()}',
+                {$this->getCourseNumber()},
+                {$this->getDeptId()}
+                )
+            ");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function delete()
