@@ -53,17 +53,35 @@
 
         static function getAll()
         {
-
+            $returned_students = $GLOBALS['DB']->query("SELECT * FROM students;");
+            $students = array();
+            foreach($returned_students as $student) {
+                $name = $student['name'];
+                $enrollment_date = $student['enrollment_date'];
+                $dept_id = $student['dept_id'];
+                $id = $student['id'];
+                $new_student = new Student($name, $enrollment_date, $dept_id, $id);
+                array_push($students, $new_student);
+            }
+            return $students;
         }
 
         static function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM students");
         }
 
         function save()
         {
-
+            $GLOBALS['DB']->exec(
+            "INSERT INTO students (name, enrollment_date, dept_id)
+            VALUES (
+                '{$this->getName()}',
+                '{$this->getEnrollmentDate()}',
+                {$this->getDeptId()}
+                )
+            ");
+            $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
         function delete()
