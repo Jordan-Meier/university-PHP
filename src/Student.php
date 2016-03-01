@@ -91,7 +91,14 @@
 
         function update($name, $dept_id)
         {
-
+            $GLOBALS['DB']->exec(
+                "UPDATE students
+                SET name = '{$name}',
+                    dept_id = {$dept_id}
+                WHERE id = {$this->getId()};"
+            );
+            $this->setName($name);
+            $this->setDeptId($dept_id);
         }
 
         function getCourses()

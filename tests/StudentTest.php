@@ -94,5 +94,34 @@
             $this->assertEquals([], $result);
         }
 
+        function test_update()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Mathematics";
+            $test_department2 = new Department($name);
+            $test_department2->save();
+
+            $name = "Marsha Grizzle";
+            $enrollment_date = "2016-02-10";
+            $dept_id = $test_department->getId();
+            $test_student = new Student($name, $enrollment_date, $dept_id);
+            $test_student->save();
+
+            //Act
+            $new_name = "Marsha Frizzle";
+            $new_dept_id = $test_department2->getId();
+            $test_student->update($new_name, $new_dept_id);
+            $result = [$test_student->getName(), $test_student->getDeptId()];
+            // $result[] = $test_student->getName();
+            // $result[] = $test_student->getCourseNumber();
+
+            //Assert
+            $this->assertEquals(["Marsha Frizzle", $new_dept_id], $result);
+        }
+
 	}
 ?>
