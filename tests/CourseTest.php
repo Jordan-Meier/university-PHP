@@ -93,5 +93,25 @@
             //Assert
             $this->assertEquals([], $result);
         }
+
+        function test_getDepartment()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            //Act
+            $result = $test_course->getDepartment();
+
+            //Assert
+            $this->assertEquals($test_department->getName(), $result);
+        }
 	}
 ?>

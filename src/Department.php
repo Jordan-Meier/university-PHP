@@ -97,15 +97,6 @@
             return $students;
         }
 
-        function addCourse($course_id)
-        {
-
-        }
-
-        function addStudent($student_id)
-        {
-
-        }
     }
 
  ?>

@@ -130,5 +130,23 @@
             //Assert
             $this->assertEquals([$test_student, $test_student2], $result);
         }
+
+        function addCourse()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $test_course = new Course($name, $course_number);
+            $test_course->save();
+
+            //Act
+            $test_department->addCourse($test_course->getId());
+
+            //Assert
+        }
 	}
 ?>
