@@ -103,7 +103,24 @@
 
         function getCourses()
         {
+            $query = $GLOBALS['DB']->query(
+                "SELECT courses.*
+                FROM students
+                JOIN courses_students ON (students.id = courses_students.student_id)
+                JOIN courses ON (courses_students.course_id = courses.id)
+                WHERE students.id = {$this->getId()};"
+            );
 
+            $courses = [];
+            foreach($query as $course){
+                $name = $course['name'];
+                $course_number = $course['course_number'];
+                $dept_id = $course['dept_id'];
+                $id = $course['id'];
+                $new_course = new Course($name, $course_number, $dept_id, $id);
+                $courses[] = $new_course;
+            }
+            return $courses;
         }
 
         function getDepartment()

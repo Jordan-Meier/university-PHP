@@ -123,5 +123,32 @@
             $this->assertEquals(["Marsha Frizzle", $new_dept_id], $result);
         }
 
+        function test_getCourses()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            $name = "Jonas Frizzle";
+            $enrollment_date = "2016-02-10";
+            $dept_id = $test_department->getId();
+            $test_student = new Student($name, $enrollment_date, $dept_id);
+            $test_student->save();
+
+            //Act
+            $test_course->addStudent($test_student->getId());
+            $result = $test_student->getCourses();
+
+            //Assert
+            $this->assertEquals([$test_course], $result);
+        }
+
 	}
 ?>
