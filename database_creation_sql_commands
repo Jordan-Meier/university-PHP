@@ -27,3 +27,15 @@ CREATE TABLE courses_students
   student_id INT,
   is_complete BOOLEAN
 );
+
+SELECT cities.* FROM
+friends JOIN cities_friends ON (friends.id = cities_friends.friend_id)
+        JOIN cities ON (cities_friends.city_id = cities.id)
+WHERE friends.id = 1;
+
+
+SELECT students.*
+FROM courses
+JOIN courses_students ON (courses.id = courses_students.course_id)
+JOIN students ON (courses_students.student_id = students.id)
+WHERE courses.id = {$this->getId()};

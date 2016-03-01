@@ -158,11 +158,46 @@
             $test_student = new Student($name, $enrollment_date, $dept_id);
             $test_student->save();
 
+            $name = "Jason Freezy";
+            $enrollment_date = "2016-02-10";
+            $dept_id = $test_department->getId();
+            $test_student2 = new Student($name, $enrollment_date, $dept_id);
+            $test_student2->save();
+
             //Act
+            $test_course->addStudent($test_student->getId());
+            $test_course->addStudent($test_student2->getId());
             $result = $test_course->getStudents();
 
             //Assert
-            $this->assertEquals([$test_student], $result);
+            $this->assertEquals([$test_student, $test_student2], $result);
+        }
+
+        function test_addStudent()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            $name = "Jonas Frizzle";
+            $enrollment_date = "2016-02-10";
+            $dept_id = $test_department->getId();
+            $test_student = new Student($name, $enrollment_date, $dept_id);
+            $test_student->save();
+
+            //Act
+            // var_dump($test_student);
+            $test_course->addStudent($test_student->getId());
+
+            //Assert
+            $this->assertEquals($test_course->getStudents(), [$test_student]);
         }
 	}
 ?>
