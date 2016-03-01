@@ -48,6 +48,7 @@
         static function getAll()
         {
             $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
+        //    var_dump($returned_courses);
             $courses = array();
             foreach($returned_courses as $course) {
                 $name = $course['name'];
@@ -85,14 +86,26 @@
 
         function update($name, $course_number)
         {
+            $GLOBALS['DB']->exec(
+                "UPDATE courses
+                SET name = '{$name}',
+                    course_number = {$course_number}
+                WHERE id = {$this->getId()};"
+            );
+            $this->setName($name);
+            $this->setCourseNumber($course_number);
 
         }
 
         function getDepartment()
         {
             $query = $GLOBALS['DB']->query("SELECT name FROM departments WHERE id = {$this->getDeptId()}");
+        //    var_dump($query);
+            // $result = $query[0]['name'];
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        //    var_dump($result);
             return $result[0]['name'];
+            // return $result;
         }
 
         function getStudents()

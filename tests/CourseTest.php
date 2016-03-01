@@ -113,5 +113,30 @@
             //Assert
             $this->assertEquals($test_department->getName(), $result);
         }
+
+        function test_update()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            //Act
+            $new_name = "Pre Mature N. America";
+            $new_number = 104;
+            $test_course->update($new_name, $new_number);
+            $result = [];
+            $result[] = $test_course->getName();
+            $result[] = $test_course->getCourseNumber();
+
+            //Assert
+            $this->assertEquals(["Pre Mature N. America", 104], $result);
+        }
 	}
 ?>
