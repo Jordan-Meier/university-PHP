@@ -67,7 +67,18 @@
 
         function getCourses()
         {
+            $courses = array();
+            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses WHERE dept_id = {$this->getId()}");
+            foreach($returned_courses as $course) {
+                $name = $course['name'];
+                $course_number = $course['course_number'];
+                $dept_id = $course['dept_id'];
+                $id = $course['id'];
 
+                $new_course = new Course($name, $course_number, $dept_id, $id);
+                array_push($courses, $new_course);
+            }
+            return $courses;
         }
 
         function getStudnets()
