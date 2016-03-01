@@ -38,7 +38,8 @@
 
         function save()
         {
-
+            // $GLOBALS['DB']->exec("INSERT INTO departments (name) VALUES ('{$this->getName()}')");
+            // $this->id= $GLOBALS['DB']->lastInsertId();
         }
 
         function delete()
@@ -68,7 +69,7 @@
 
         function addStudent($student_id)
         {
-            
+
         }
     }
 
