@@ -27,7 +27,7 @@
 
             //Act
             $result = Department::getAll();
-            
+
             //Assert
             $this->assertEquals($test_Department, $result[0]);
         }
@@ -58,12 +58,30 @@
             $name2 = "Philosophy";
             $test_Department2 = new Department($name2);
             $test_Department2->save();
+
             //Act
             Department::deleteAll();
             $result = Department::getAll();
+
             //Assert
             $this->assertEquals([], $result);
         }
 
+        function test_update()
+        {
+            //Arrange
+            $name = "History";
+            $test_Department = new Department($name);
+            $test_Department->save();
+
+            //Act
+            $new_name = "History of America";
+            $test_Department->update($new_name);
+            $result = $test_Department->getName();
+
+            //Assert
+            $this->assertEquals("History of America", $result);
+
+        }
 	}
 ?>

@@ -55,9 +55,14 @@
 
         }
 
-        function update()
+        function update($name)
         {
-
+            $GLOBALS['DB']->exec(
+                "UPDATE departments
+                SET name = '{$name}'
+                WHERE id = {$this->getId()};"
+            );
+            $this->setName($name);
         }
 
         function getCourses()
