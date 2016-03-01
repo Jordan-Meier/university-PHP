@@ -24,8 +24,10 @@
             $name = "History";
             $test_Department = new Department($name);
             $test_Department->save();
+
             //Act
             $result = Department::getAll();
+            
             //Assert
             $this->assertEquals($test_Department, $result[0]);
         }

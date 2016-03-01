@@ -28,18 +28,26 @@
 
         static function getAll()
         {
-
+            $returned_departments = $GLOBALS['DB']->query("SELECT * FROM departments;");
+            $departments = array();
+            foreach($returned_departments as $department) {
+                $name = $department['name'];
+                $id = $department['id'];
+                $new_department = new Department($name, $id);
+                array_push($departments, $new_department);
+            }
+            return $departments;
         }
 
         static function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM departments;");
         }
 
         function save()
         {
-            // $GLOBALS['DB']->exec("INSERT INTO departments (name) VALUES ('{$this->getName()}')");
-            // $this->id= $GLOBALS['DB']->lastInsertId();
+            $GLOBALS['DB']->exec("INSERT INTO departments (name) VALUES ('{$this->getName()}')");
+            $this->id= $GLOBALS['DB']->lastInsertId();
         }
 
         function delete()

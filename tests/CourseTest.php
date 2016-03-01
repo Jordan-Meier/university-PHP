@@ -20,24 +20,78 @@
 
         function test_save()
         {
-            // //Arrange
-            // $name = "History";
-            // $id = null;
-            // $test_department = new Department($name, $id);
-            // $test_department->save();
-            //
-            // $name = "Pre Colonial N. America";
-            // $course_number = 103;
-            // $dept_id = $this->getDeptId();
-            // $test_course = new Course($name, $course_number, $dept_id, $id);
-            //
-            // //Act
-            // $test_course->save();
-            //
-            // //Assert
-            // $result = Course::getAll();
-            // $this->assertEquals($test_course, $result[0]);
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
 
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            //Act
+            $result = Course::getAll();
+
+            //Assert
+
+            $this->assertEquals($test_course, $result[0]);
+
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "History";
+            $test_Department = new Department($name);
+            $test_Department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_Department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            $name2 = "American Civial War";
+            $course_number2 = 104;
+            $dept_id2 = $test_Department->getId();
+            $test_course2 = new Course($name2, $course_number2, $dept_id2);
+            $test_course->save();
+
+            //Act
+            $result = Course::getAll();
+
+            //Assert
+            $this->assertEquals([$test_course, $test_course2], $result);
+        }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "History";
+            $test_Department = new Department($name);
+            $test_Department->save();
+
+            $name = "Pre Colonial N. America";
+            $course_number = 103;
+            $dept_id = $test_Department->getId();
+            $test_course = new Course($name, $course_number, $dept_id);
+            $test_course->save();
+
+            $name2 = "American Civial War";
+            $course_number2 = 104;
+            $dept_id2 = $test_Department->getId();
+            $test_course2 = new Course($name2, $course_number2, $dept_id2);
+            $test_course->save();
+
+
+            //Act
+            Course::deleteAll();
+            $result = Course::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
         }
 	}
 ?>

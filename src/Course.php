@@ -12,7 +12,6 @@
             $this->name = $name;
             $this->course_number = $course_number;
             $this->dept_id = $dept_id;
-            $this->is_complete = $is_complete;
             $this->id = $id;
         }
 
