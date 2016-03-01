@@ -81,9 +81,20 @@
             return $courses;
         }
 
-        function getStudnets()
+        function getStudents()
         {
+            $students = array();
+            $returned_students = $GLOBALS['DB']->query("SELECT * FROM students WHERE dept_id = {$this->getId()}");
+            foreach($returned_students as $student) {
+                $name = $student['name'];
+                $enrollment_date = $student['enrollment_date'];
+                $dept_id = $student['dept_id'];
+                $id = $student['id'];
 
+                $new_student = new Student($name, $enrollment_date, $dept_id, $id);
+                array_push($students, $new_student);
+            }
+            return $students;
         }
 
         function addCourse($course_id)
