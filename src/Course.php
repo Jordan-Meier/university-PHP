@@ -66,7 +66,7 @@
 
         }
 
-        function update()
+        function update($name, $course_number)
         {
 
         }
@@ -88,7 +88,7 @@
 
         function addStudent()
         {
-            
+
         }
     }
 
