@@ -125,7 +125,9 @@
 
         function getDepartment()
         {
-
+            $query = $GLOBALS['DB']->query("SELECT * FROM departments WHERE id = {$this->getDeptId()}");
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $result[0]['name'];
         }
 
 

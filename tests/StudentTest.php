@@ -150,5 +150,25 @@
             $this->assertEquals([$test_course], $result);
         }
 
+        function test_getDepartment()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Jonas Frizzle";
+            $enrollment_date = "2016-02-10";
+            $dept_id = $test_department->getId();
+            $test_student = new Student($name, $enrollment_date, $dept_id);
+            $test_student->save();
+
+            //Act
+            $result = $test_student->getDepartment();
+
+            //Assert
+            $this->assertEquals($test_department->getName(), $result);
+        }
+
 	}
 ?>
