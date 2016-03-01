@@ -1,0 +1,29 @@
+CREATE TABLE students
+(
+  id serial PRIMARY KEY,
+  name VARCHAR(255),
+  enrollment_date DATE,
+  dept_id INT
+);
+
+CREATE TABLE courses
+(
+  id serial PRIMARY KEY,
+  name VARCHAR(255),
+  course_number INT,
+  dept_id INT,
+  is_complete BOOLEAN
+);
+
+CREATE TABLE departments
+(
+  id serial PRIMARY KEY,
+  name VARCHAR(255)
+);
+
+CREATE TABLE courses_students
+(
+  id serial PRIMARY KEY,
+  course_id INT,
+  student_id INT
+);
