@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Courses</h1>
+        {% if courses is not empty %}
+            <ul>
+                {% for course in courses %}
+                    <li><a href='/courses/{{course.getId}}'>{{course.getName}}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Oh no, no courses!</p>
+        {% endif %}
+
+        <h2>Add New Course</h2>
+        <form action="/courses" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name">
+            <label for="course_number">Course Number: </label>
+            <input type="number" name="course_number">
+            <label for="dept_id">Department: </label>
+            <select class="" name="dept_id">
+                {% for department in departments %}
+                    <option value='{{department.getId}}'>{{department.getName}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="button">Add Course</button>
+        </form>
+        <a href='/'>Home</a>
+    </body>
+</html>

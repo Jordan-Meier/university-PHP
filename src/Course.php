@@ -117,7 +117,7 @@
                 JOIN students ON (courses_students.student_id = students.id)
                 WHERE courses.id = {$this->getId()};"
             );
-            
+
             $students = [];
             foreach($query as $student){
                 $name = $student['name'];
@@ -130,6 +130,19 @@
             }
             return $students;
         }
+        static function find($search_id)
+       {
+           $found_course = null;
+           $courses = Course::getAll();
+           foreach($courses as $course) {
+               $course_id = $course->getId();
+               if ($course_id == $search_id) {
+                 $found_course = $course;
+               }
+           }
+           return $found_course;
+       }
+
 
         function markComplete()
         {

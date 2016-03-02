@@ -33,14 +33,39 @@
 	$app->get('/courses', function() use ($app)
 	{
 		$courses = Course::getAll();
-		return $app['twig']->render('courses.html.twig', array('courses' => $courses));
+		$departments = Department::getAll();
+		return $app['twig']->render('courses.html.twig', array('courses' => $courses, 'departments' => $departments));
 	});
+
+	$app->post('/courses', function() use ($app)
+	{
+		$new_course = new Course($_POST['name'], $_POST['course_number'], $_POST['dept_id']);
+		$new_course->save();
+
+		$courses = Course::getAll();
+		$departments = Department::getAll();
+		return $app['twig']->render('courses.html.twig', array('courses' => $courses, 'departments' => $departments));
+	});
+
+	$app->get('/courses/{id}', function($id) use ($app)
+	{
+		$course = Course::find($id);
+		$students = $course->getStudents();
+		return $app['twig']->render('course.html.twig', array('course' => $course, 'students' => $students));
+	});
+
 
 	$app->get('/students', function() use ($app)
 	{
 		$students = Student::getAll();
 		$departments = Department::getAll();
 		return $app['twig']->render('students.html.twig', array('students' => $students, 'departments' => $departments));
+	});
+
+	$app->get('/students/{id}', function($id) use ($app)
+	{
+		$student = Student::find($id);
+		return $app['twig']->render('student.html.twig', array('student' => $student));
 	});
 
 	$app->post('/students', function() use ($app)
