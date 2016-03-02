@@ -170,5 +170,30 @@
             $this->assertEquals($test_department->getName(), $result);
         }
 
+
+        function test_find()
+        {
+            //Arrange
+            $name = "History";
+            $test_department = new Department($name);
+            $test_department->save();
+
+            $name = "Jonas Frizzle";
+            $enrollment_date = "2016-02-10";
+            $dept_id = $test_department->getId();
+            $test_student = new Student($name, $enrollment_date, $dept_id);
+            $test_student->save();
+
+            $name2 = "Marsha Grizzle";
+            $enrollment_date2 = "2016-02-10";
+            $dept_id2 = $test_department->getId();
+            $test_student2 = new Student($name2, $enrollment_date2, $dept_id2);
+            $test_student2->save();
+            //Act
+            $result = Student::find($test_student->getId());
+            //Assert
+            $this->assertEquals($test_student, $result);
+        }
+
 	}
 ?>
