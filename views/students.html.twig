@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Students</h1>
+        <ul>
+            {% for student in students %}
+                <li><a href='/students/{{student.getId}}'>{{student.getName}}</a></li>
+            {% endfor %}
+        </ul>
+        <h2>Add New Student</h2>
+        <form action="/students" method="post">
+            <label for="name">Name:</label>
+            <input type="text" name="name">
+            <label for="enrollment_date">Enrollment Date: </label>
+            <input type="date" name="enrollment_date">
+            <label for="dept_id">Major: </label>
+            <select class="" name="dept_id">
+                {% for department in departments %}
+                    <option value='{{department.getId}}'>{{department.getName}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="button">Add Student</button>
+        </form>
+        <a href='/'>Home</a>
+    </body>
+</html>
